@@ -49,11 +49,12 @@
             margin-bottom: 0.75rem;
             color: #334155;
             line-height: 1.6;
+            display: block; /* Ensures html2pdf calculates height correctly */
         }
 
         .styled-list li::before {
             content: "•";
-            color: #3b82f6; /* Blue bullet */
+            color: #3b82f6;
             font-weight: bold;
             display: inline-block;
             width: 1em;
@@ -62,10 +63,27 @@
         }
 
         /* Print Optimization */
+        .keep-together {
+            page-break-inside: avoid !important;
+            break-inside: avoid-page !important;
+            display: block;
+        }
+
+        .force-page-break {
+            page-break-before: always;
+            height: 0;
+            margin: 0;
+            padding: 0;
+            border: none;
+        }
+
         @media print {
             body {
                 background-color: white;
                 padding: 0;
+            }
+            .content-section {
+                padding: 0 !important;
             }
             .report-container {
                 box-shadow: none;
@@ -75,19 +93,6 @@
             }
             .no-print {
                 display: none !important;
-            }
-            .avoid-break {
-                margin-bottom: 2rem !important;
-            }
-            /* Add specific break avoidances for smaller elements to keep them intact */
-            li, tr, p, .bg-slate-800\/50, .bg-blue-50, .bg-green-50, .bg-yellow-50 {
-                page-break-inside: avoid;
-            }
-            .force-page-break {
-                page-break-before: always;
-            }
-            h2, h3 {
-                page-break-after: avoid;
             }
         }
     </style>
@@ -105,7 +110,7 @@
     <main id="reportContent" class="report-container max-w-4xl">
         
         <!-- Header Area -->
-        <header class="bg-slate-900 text-white p-10 md:p-16 avoid-break">
+        <header class="keep-together bg-slate-900 text-white p-10 md:p-16">
             <p class="text-blue-400 font-medium tracking-wide mb-2 mt-4">The Founders Blueprint (Core Team)</p>
             <h1 class="text-3xl md:text-5xl font-extrabold tracking-tight mb-8">CORE TEAM & SCOPE OF RESPONSIBILITY</h1>
             
@@ -120,131 +125,162 @@
         <article class="content-section pt-10">
             
             <!-- Role 1 -->
-            <section class="avoid-break mb-12 border-b border-slate-100 pb-12">
-                <h2 class="text-2xl font-bold text-slate-900 mb-4 text-blue-800">1. SENIOR ΒΡΟ ADVISOR (Part-Time / Retainer)</h2>
-                <p class="text-slate-700 mb-6 leading-relaxed bg-blue-50 p-5 rounded-lg border border-blue-100">
-                    <strong class="text-slate-900">Role Overview:</strong> This role will be the strategic compass for the executive team, leveraging his/her extensive network and industry expertise to guide go-to-market strategy, ensure legal compliance, and unlock Enterprise-level opportunities.
-                </p>
+            <section class="mb-12 border-b border-slate-100 pb-12">
+                <div class="keep-together mb-6">
+                    <h2 class="text-2xl font-bold text-slate-900 mb-4 text-blue-800">1. SENIOR ΒΡΟ ADVISOR (Part-Time / Retainer)</h2>
+                    <p class="text-slate-700 leading-relaxed bg-blue-50 p-5 rounded-lg border border-blue-100">
+                        <strong class="text-slate-900">Role Overview:</strong> This role will be the strategic compass for the executive team, leveraging his/her extensive network and industry expertise to guide go-to-market strategy, ensure legal compliance, and unlock Enterprise-level opportunities.
+                    </p>
+                </div>
 
-                <p class="font-bold text-slate-900 mb-4">Key Responsibilities:</p>
-                <ul class="styled-list">
-                    <li>Open doors and facilitate C-level introductions to prospective Enterprise clients (Banking, Fintech, Telco, E-commerce).</li>
-                    <li>Draft, review, and finalize Master Service Agreements (MSA) and SLA frameworks.</li>
-                    <li>Develop comprehensive Business Continuity Plans (BCP) and Disaster Recovery Plans (DRP).</li>
-                    <li>Guide the IT and Ops teams toward ISO 9001 and ISO 27001 readiness.</li>
-                    <li>Act as a strategic mentor to the founding core team, conducting monthly executive reviews to ensure the business is scaling safely.</li>
-                    <li>Advise on the legal structure of outsourcing contracts (PKWT) to mitigate industrial relations risks under Indonesian Labor Laws.</li>
-                </ul>
+                <div class="keep-together mb-6">
+                    <p class="font-bold text-slate-900 mb-4">Key Responsibilities:</p>
+                    <ul class="styled-list">
+                        <li>Open doors and facilitate C-level introductions to prospective Enterprise clients (Banking, Fintech, Telco, E-commerce).</li>
+                        <li>Draft, review, and finalize Master Service Agreements (MSA) and SLA frameworks.</li>
+                        <li>Develop comprehensive Business Continuity Plans (BCP) and Disaster Recovery Plans (DRP).</li>
+                        <li>Guide the IT and Ops teams toward ISO 9001 and ISO 27001 readiness.</li>
+                        <li>Act as a strategic mentor to the founding core team, conducting monthly executive reviews to ensure the business is scaling safely.</li>
+                        <li>Advise on the legal structure of outsourcing contracts (PKWT) to mitigate industrial relations risks under Indonesian Labor Laws.</li>
+                    </ul>
+                </div>
 
-                <p class="font-bold text-slate-900 mb-4 mt-6">Requirements:</p>
-                <ul class="styled-list">
-                    <li>10-15+ years of Senior Leadership experience (VP/C-Level) at a Top Tier BPO in Indonesia.</li>
-                    <li>Deep understanding of Indonesian labor laws (UU Cipta Kerja) regarding outsourcing and contract structuring.</li>
-                    <li>Active and warm connections with decision-makers (C-Level/VP) in target industries.</li>
-                    <li>Proven track record of scaling BPO operations from zero, or successfully executing a turnaround strategy for underperforming BPO sites.</li>
-                    <li>Strong command of compliance frameworks, specifically ISO 9001 and ISO 27001 implementations.</li>
-                </ul>
+                <div class="keep-together mb-6">
+                    <p class="font-bold text-slate-900 mb-4 mt-6">Requirements:</p>
+                    <ul class="styled-list">
+                        <li>10-15+ years of Senior Leadership experience (VP/C-Level) at a Top Tier BPO in Indonesia.</li>
+                        <li>Deep understanding of Indonesian labor laws (UU Cipta Kerja) regarding outsourcing and contract structuring.</li>
+                        <li>Active and warm connections with decision-makers (C-Level/VP) in target industries.</li>
+                        <li>Proven track record of scaling BPO operations from zero, or successfully executing a turnaround strategy for underperforming BPO sites.</li>
+                        <li>Strong command of compliance frameworks, specifically ISO 9001 and ISO 27001 implementations.</li>
+                    </ul>
+                </div>
                 
-                <p class="text-slate-700 bg-green-50 text-green-900 p-4 rounded-lg font-medium border border-green-200 mt-6">
-                    <strong>Compensation:</strong> Monthly Retainer Fee + Lucrative Success Fee (Percentage of Gross Margin per closed Enterprise deal).
-                </p>
+                <div class="keep-together">
+                    <p class="text-slate-700 bg-green-50 text-green-900 p-4 rounded-lg font-medium border border-green-200 mt-6">
+                        <strong>Compensation:</strong> Monthly Retainer Fee + Lucrative Success Fee (Percentage of Gross Margin per closed Enterprise deal).
+                    </p>
+                </div>
             </section>
 
             <!-- Role 2 -->
-            <section class="avoid-break mb-12 border-b border-slate-100 pb-12">
-                <h2 class="text-2xl font-bold text-slate-900 mb-4 text-blue-800">2. VP OF BUSINESS DEVELOPMENT & SALES (Full-Time)</h2>
-                <p class="text-slate-700 mb-6 leading-relaxed bg-blue-50 p-5 rounded-lg border border-blue-100">
-                    <strong class="text-slate-900">Role Overview:</strong> This role is a primary rainmaker. His/her mission is to secure the first batch of B2B clients and establish a scalable revenue pipeline. He/she will own the pricing strategy and client acquisition process.
-                </p>
+            <section class="mb-12 border-b border-slate-100 pb-12">
+                <div class="keep-together mb-6">
+                    <h2 class="text-2xl font-bold text-slate-900 mb-4 text-blue-800">2. VP OF BUSINESS DEVELOPMENT & SALES (Full-Time)</h2>
+                    <p class="text-slate-700 leading-relaxed bg-blue-50 p-5 rounded-lg border border-blue-100">
+                        <strong class="text-slate-900">Role Overview:</strong> This role is a primary rainmaker. His/her mission is to secure the first batch of B2B clients and establish a scalable revenue pipeline. He/she will own the pricing strategy and client acquisition process.
+                    </p>
+                </div>
 
-                <p class="font-bold text-slate-900 mb-4">Key Responsibilities:</p>
-                <ul class="styled-list">
-                    <li>Drive monthly and quarterly revenue targets (MRR) through aggressive B2B sales.</li>
-                    <li>Develop commercial rate cards for Per Seat/FTE, Per Minute, and Pay-per-Performance models.</li>
-                    <li>Manage the end-to-end sales cycle, from lead generation and pitching to contract negotiation and closing.</li>
-                    <li>Act as the primary Key Account Manager for early clients, conducting Quarterly Business Reviews (QBR) to secure contract renewals and upselling opportunities.</li>
-                    <li>Implement and maintain a CRM system to accurately track the sales pipeline, lead conversion rates, and revenue forecasts for the CEO/Board.</li>
-                </ul>
+                <div class="keep-together mb-6">
+                    <p class="font-bold text-slate-900 mb-4">Key Responsibilities:</p>
+                    <ul class="styled-list">
+                        <li>Drive monthly and quarterly revenue targets (MRR) through aggressive B2B sales.</li>
+                        <li>Develop commercial rate cards for Per Seat/FTE, Per Minute, and Pay-per-Performance models.</li>
+                        <li>Manage the end-to-end sales cycle, from lead generation and pitching to contract negotiation and closing.</li>
+                        <li>Act as the primary Key Account Manager for early clients, conducting Quarterly Business Reviews (QBR) to secure contract renewals and upselling opportunities.</li>
+                        <li>Implement and maintain a CRM system to accurately track the sales pipeline, lead conversion rates, and revenue forecasts for the CEO/Board.</li>
+                    </ul>
+                </div>
 
-                <p class="font-bold text-slate-900 mb-4 mt-6">Requirements:</p>
-                <ul class="styled-list">
-                    <li>5+ years of B2B Sales experience in the BPO, Contact Center, or SaaS Omnichannel industry.</li>
-                    <li><strong>Mandatory:</strong> Must possess a strong existing pipeline or 'Bring Your Own Client' (BYOC) capability.</li>
-                    <li>Proven track record of closing and managing enterprise accounts of 50+ seats.</li>
-                    <li>Hands-on experience navigating B2B enterprise procurement processes and e-Tender portals (e.g., Ariba, SAP, LPSE).</li>
-                    <li>"Roll-up-your-sleeves" startup mentality: capable of building pitch decks, calculating complex pricing margins (Excel proficiency), and pitching independently.</li>
-                </ul>
+                <div class="keep-together mb-6">
+                    <p class="font-bold text-slate-900 mb-4 mt-6">Requirements:</p>
+                    <ul class="styled-list">
+                        <li>5+ years of B2B Sales experience in the BPO, Contact Center, or SaaS Omnichannel industry.</li>
+                        <li><strong>Mandatory:</strong> Must possess a strong existing pipeline or 'Bring Your Own Client' (BYOC) capability.</li>
+                        <li>Proven track record of closing and managing enterprise accounts of 50+ seats.</li>
+                        <li>Hands-on experience navigating B2B enterprise procurement processes and e-Tender portals (e.g., Ariba, SAP, LPSE).</li>
+                        <li>"Roll-up-your-sleeves" startup mentality: capable of building pitch decks, calculating complex pricing margins (Excel proficiency), and pitching independently.</li>
+                    </ul>
+                </div>
                 
-                <p class="text-slate-700 bg-green-50 text-green-900 p-4 rounded-lg font-medium border border-green-200 mt-6">
-                    <strong>Compensation:</strong> Competitive Base Salary + Uncapped Recurring Commission per active seat + ESOP (Employee Stock Ownership Plan) upon hitting targets.
-                </p>
+                <div class="keep-together">
+                    <p class="text-slate-700 bg-green-50 text-green-900 p-4 rounded-lg font-medium border border-green-200 mt-6">
+                        <strong>Compensation:</strong> Competitive Base Salary + Uncapped Recurring Commission per active seat + ESOP (Employee Stock Ownership Plan) upon hitting targets.
+                    </p>
+                </div>
             </section>
 
             <!-- Role 3 -->
-            <section class="avoid-break mb-12 border-b border-slate-100 pb-12">
-                <h2 class="text-2xl font-bold text-slate-900 mb-4 text-blue-800">3. VP OF BPO OPERATIONS (Full-Time)</h2>
-                <p class="text-slate-700 mb-6 leading-relaxed bg-blue-50 p-5 rounded-lg border border-blue-100">
-                    <strong class="text-slate-900">Role Overview:</strong> This role is the commander of the production floor. He/she will translate client SLAs into operational reality, ensuring agents deliver top-tier performance while maintaining healthy margins and low turnover.
-                </p>
+            <section class="mb-12 border-b border-slate-100 pb-12">
+                <div class="keep-together mb-6">
+                    <h2 class="text-2xl font-bold text-slate-900 mb-4 text-blue-800">3. VP OF BPO OPERATIONS (Full-Time)</h2>
+                    <p class="text-slate-700 leading-relaxed bg-blue-50 p-5 rounded-lg border border-blue-100">
+                        <strong class="text-slate-900">Role Overview:</strong> This role is the commander of the production floor. He/she will translate client SLAs into operational reality, ensuring agents deliver top-tier performance while maintaining healthy margins and low turnover.
+                    </p>
+                </div>
 
-                <p class="font-bold text-slate-900 mb-4">Key Responsibilities:</p>
-                <ul class="styled-list">
-                    <li>Set up production floor SOPs, Quality Assurance (QA) frameworks, and escalation matrices from scratch.</li>
-                    <li>Drive mass hiring, training modules, and workforce management (WFM/Shift scheduling).</li>
-                    <li>Strictly monitor and optimize core BPO metrics: SLA, AHT, CSAT, Shrinkage, and Occupancy Rate.</li>
-                    <li>Lead client-facing operational syncs (Weekly/Monthly Business Reviews) to report on SLA performance and action plans.</li>
-                    <li>Manage production floor P&L directly by strictly controlling overtime (OT) budgets, optimizing headcount efficiency, and minimizing agent attrition rates.</li>
-                </ul>
+                <div class="keep-together mb-6">
+                    <p class="font-bold text-slate-900 mb-4">Key Responsibilities:</p>
+                    <ul class="styled-list">
+                        <li>Set up production floor SOPs, Quality Assurance (QA) frameworks, and escalation matrices from scratch.</li>
+                        <li>Drive mass hiring, training modules, and workforce management (WFM/Shift scheduling).</li>
+                        <li>Strictly monitor and optimize core BPO metrics: SLA, AHT, CSAT, Shrinkage, and Occupancy Rate.</li>
+                        <li>Lead client-facing operational syncs (Weekly/Monthly Business Reviews) to report on SLA performance and action plans.</li>
+                        <li>Manage production floor P&L directly by strictly controlling overtime (OT) budgets, optimizing headcount efficiency, and minimizing agent attrition rates.</li>
+                    </ul>
+                </div>
 
-                <p class="font-bold text-slate-900 mb-4 mt-6">Requirements:</p>
-                <ul class="styled-list">
-                    <li>5-7+ years as an Operations Manager or Site Manager managing 100+ seats in a BPO environment.</li>
-                    <li>Highly data-driven with exceptional analytical skills for workforce forecasting (Erlang C calculation, Shrinkage, Occupancy).</li>
-                    <li>Deep familiarity with COPC (Customer Operations Performance Center) standards and frameworks.</li>
-                    <li>Hands-on experience managing Omnichannel operations (Voice, WhatsApp API, Email, Social Media CRM like Zendesk, Genesys, or local SaaS).</li>
-                    <li>Builder mindset: willing to personally draft SOPs, conduct initial agent interviews, and handle floor escalations in the early stages of the company.</li>
-                </ul>
+                <div class="keep-together mb-6">
+                    <p class="font-bold text-slate-900 mb-4 mt-6">Requirements:</p>
+                    <ul class="styled-list">
+                        <li>5-7+ years as an Operations Manager or Site Manager managing 100+ seats in a BPO environment.</li>
+                        <li>Highly data-driven with exceptional analytical skills for workforce forecasting (Erlang C calculation, Shrinkage, Occupancy).</li>
+                        <li>Deep familiarity with COPC (Customer Operations Performance Center) standards and frameworks.</li>
+                        <li>Hands-on experience managing Omnichannel operations (Voice, WhatsApp API, Email, Social Media CRM like Zendesk, Genesys, or local SaaS).</li>
+                        <li>Builder mindset: willing to personally draft SOPs, conduct initial agent interviews, and handle floor escalations in the early stages of the company.</li>
+                    </ul>
+                </div>
                 
-                <p class="text-slate-700 bg-green-50 text-green-900 p-4 rounded-lg font-medium border border-green-200 mt-6">
-                    <strong>Compensation:</strong> Competitive Base Salary + Quarterly Performance Bonus (tied to SLA achievement and low attrition) + ESOP.
-                </p>
+                <div class="keep-together">
+                    <p class="text-slate-700 bg-green-50 text-green-900 p-4 rounded-lg font-medium border border-green-200 mt-6">
+                        <strong>Compensation:</strong> Competitive Base Salary + Quarterly Performance Bonus (tied to SLA achievement and low attrition) + ESOP.
+                    </p>
+                </div>
             </section>
 
             <!-- Role 4 -->
-            <section class="avoid-break mb-12 border-b border-slate-100 pb-12">
-                <h2 class="text-2xl font-bold text-slate-900 mb-4 text-blue-800">4. HEAD OF IT & INFRASTRUCTURE (Full-Time)</h2>
-                
-                <p class="text-slate-700 mb-6 leading-relaxed bg-blue-50 p-5 rounded-lg border border-blue-100">
-                    <strong class="text-slate-900">Role Overview:</strong> This role is the architect of the digital backbone. He/she will build and maintain a cost-effective, highly secure, and scalable IT infrastructure for both internal operations and 'Infrastructure Only' clients.
-                </p>
+            <section class="mb-12 border-b border-slate-100 pb-12">
+                <div class="keep-together mb-6">
+                    <h2 class="text-2xl font-bold text-slate-900 mb-4 text-blue-800">4. HEAD OF IT & INFRASTRUCTURE (Full-Time)</h2>
+                    <p class="text-slate-700 leading-relaxed bg-blue-50 p-5 rounded-lg border border-blue-100">
+                        <strong class="text-slate-900">Role Overview:</strong> This role is the architect of the digital backbone. He/she will build and maintain a cost-effective, highly secure, and scalable IT infrastructure for both internal operations and 'Infrastructure Only' clients.
+                    </p>
+                </div>
 
-                <p class="font-bold text-slate-900 mb-4">Key Responsibilities:</p>
-                <ul class="styled-list">
-                    <li>Deploy and maintain Cloud PBX/Dialers (e.g., viciDial, Asterisk) and integrate Omnichannel SaaS CRM.</li>
-                    <li>Manage hardware deployment, LAN/WAN architecture, and Dual ISP failover systems to guarantee 99.9% uptime.</li>
-                    <li>Enforce strict data security protocols (USB blocking, firewalls, site restrictions) to meet financial industry standards.</li>
-                    <li>Handle direct vendor management and procurement negotiations (ISPs, hardware suppliers, software licenses) to ensure CAPEX/OPEX efficiency.</li>
-                    <li>Establish and manage the internal IT Helpdesk/Ticketing system to provide rapid troubleshooting for production floor agents.</li>
-                </ul>
+                <div class="keep-together mb-6">
+                    <p class="font-bold text-slate-900 mb-4">Key Responsibilities:</p>
+                    <ul class="styled-list">
+                        <li>Deploy and maintain Cloud PBX/Dialers (e.g., viciDial, Asterisk) and integrate Omnichannel SaaS CRM.</li>
+                        <li>Manage hardware deployment, LAN/WAN architecture, and Dual ISP failover systems to guarantee 99.9% uptime.</li>
+                        <li>Enforce strict data security protocols (USB blocking, firewalls, site restrictions) to meet financial industry standards.</li>
+                        <li>Handle direct vendor management and procurement negotiations (ISPs, hardware suppliers, software licenses) to ensure CAPEX/OPEX efficiency.</li>
+                        <li>Establish and manage the internal IT Helpdesk/Ticketing system to provide rapid troubleshooting for production floor agents.</li>
+                    </ul>
+                </div>
 
-                <p class="font-bold text-slate-900 mb-4 mt-6">Requirements:</p>
-                <ul class="styled-list">
-                    <li>5+ years as an IT/Network Administrator, specifically within a Contact Center/BPO environment.</li>
-                    <li>Hands-on experience with open-source dialing technologies (viciDial, Asterisk, FreePBX).</li>
-                    <li><strong>[NEW]</strong> Strong networking expertise: hands-on configuration of Mikrotik/Cisco routers, VPNs, and VLANs.</li>
-                    <li>Proficient in REST API integrations (connecting Cloud Dialers with third-party CRM systems).</li>
-                    <li>Solid understanding of ISO 27001 data security compliance, encompassing physical and logical security measures (firewalls, endpoint protection).</li>
-                </ul>
+                <div class="keep-together mb-6">
+                    <p class="font-bold text-slate-900 mb-4 mt-6">Requirements:</p>
+                    <ul class="styled-list">
+                        <li>5+ years as an IT/Network Administrator, specifically within a Contact Center/BPO environment.</li>
+                        <li>Hands-on experience with open-source dialing technologies (viciDial, Asterisk, FreePBX).</li>
+                        <li><strong>[NEW]</strong> Strong networking expertise: hands-on configuration of Mikrotik/Cisco routers, VPNs, and VLANs.</li>
+                        <li>Proficient in REST API integrations (connecting Cloud Dialers with third-party CRM systems).</li>
+                        <li>Solid understanding of ISO 27001 data security compliance, encompassing physical and logical security measures (firewalls, endpoint protection).</li>
+                    </ul>
+                </div>
 
-                <p class="text-slate-700 bg-green-50 text-green-900 p-4 rounded-lg font-medium border border-green-200 mt-6">
-                    <strong>Compensation:</strong> Competitive Base Salary + Quarterly Uptime Bonus + ESOP.
-                </p>
+                <div class="keep-together">
+                    <p class="text-slate-700 bg-green-50 text-green-900 p-4 rounded-lg font-medium border border-green-200 mt-6">
+                        <strong>Compensation:</strong> Competitive Base Salary + Quarterly Uptime Bonus + ESOP.
+                    </p>
+                </div>
             </section>
 
             <div class="force-page-break"></div>
 
             <!-- Budget Table Section -->
-            <section class="avoid-break mb-12 pb-12">
+            <section class="keep-together mb-12 pb-12">
                 <h3 class="text-xl font-bold text-slate-900 mb-4">INTERNAL BUDGET FORECAST</h3>
                 <p class="text-slate-600 mb-6 bg-yellow-50 p-4 border-l-4 border-yellow-400 rounded-r-lg">
                     <strong>CONFIDENTIAL:</strong> Core Team 6-Month OPEX Forecast Assumptions: Standard Jakarta Managerial/Head rates. Focus is on lean base salaries with high variable/commission upside.
@@ -305,13 +341,15 @@
             <div class="force-page-break"></div>
 
             <!-- KPIs Section -->
-            <section class="avoid-break mt-12 bg-slate-50 p-6 md:p-10 rounded-2xl border border-slate-200">
-                <h2 class="text-2xl font-extrabold text-blue-900 mb-10 pb-4 border-b-2 border-slate-200 uppercase tracking-wide">CONFIDENTIAL: CORE TEΑΜ ΚΡΙ TARGETS (First 6-12 Months)</h2>
+            <section class="mt-12 bg-slate-50 p-6 md:p-10 rounded-2xl border border-slate-200">
+                <div class="keep-together">
+                    <h2 class="text-2xl font-extrabold text-blue-900 mb-10 pb-4 border-b-2 border-slate-200 uppercase tracking-wide">CONFIDENTIAL: CORE TEΑΜ ΚΡΙ TARGETS (First 6-12 Months)</h2>
+                </div>
                 
                 <div class="space-y-12">
                     
                     <!-- KPI 1 -->
-                    <div>
+                    <div class="keep-together">
                         <h3 class="text-xl font-bold text-slate-800 mb-4 bg-white inline-block px-4 py-1 rounded shadow-sm border border-slate-200">1. SENIOR ΒΡΟ ADVISOR (Part-Time / Retainer)</h3>
                         <ul class="styled-list pl-4 border-l-2 border-blue-200 ml-2">
                             <li><span class="font-bold text-blue-700">Target 1 (Network Penetration):</span> Facilitate a minimum of 3-5 qualified C-Level meetings (Banking, Fintech, E-commerce) per quarter for the VP of Sales.</li>
@@ -321,7 +359,7 @@
                     </div>
 
                     <!-- KPI 2 -->
-                    <div>
+                    <div class="keep-together">
                         <h3 class="text-xl font-bold text-slate-800 mb-4 bg-white inline-block px-4 py-1 rounded shadow-sm border border-slate-200">2. VP OF BUSINESS DEVELOPMENT & SALES (Full-Time)</h3>
                         <ul class="styled-list pl-4 border-l-2 border-blue-200 ml-2">
                             <li><span class="font-bold text-blue-700">Target 1 (Time-to-First-Revenue):</span> Secure the first signed LOI / Contract (minimum 10-20 seats) within the first 90 days (Probation period target).</li>
@@ -331,7 +369,7 @@
                     </div>
 
                     <!-- KPI 3 -->
-                    <div>
+                    <div class="keep-together">
                         <h3 class="text-xl font-bold text-slate-800 mb-4 bg-white inline-block px-4 py-1 rounded shadow-sm border border-slate-200">3. VP OF BPO OPERATIONS (Full-Time)</h3>
                         <ul class="styled-list pl-4 border-l-2 border-blue-200 ml-2">
                             <li><span class="font-bold text-blue-700">Target 1 (Speed to Go-Live):</span> Achieve 100% operational readiness (agents trained, floor ready) within 14 to 21 days post-contract signing.</li>
@@ -341,7 +379,7 @@
                     </div>
 
                     <!-- KPI 4 -->
-                    <div>
+                    <div class="keep-together">
                         <h3 class="text-xl font-bold text-slate-800 mb-4 bg-white inline-block px-4 py-1 rounded shadow-sm border border-slate-200">4. HEAD OF IT & INFRASTRUCTURE (Full-Time)</h3>
                         <ul class="styled-list pl-4 border-l-2 border-blue-200 ml-2">
                             <li><span class="font-bold text-blue-700">Target 1 (Infrastructure Deployment):</span> Fully deploy the first 30-seat operational floor (Network, PCs, Cloud Dialer, CRM) within 30 days of budget approval.</li>
@@ -368,14 +406,14 @@
 
             const element = document.getElementById('reportContent');
             
-            // PDF configuration options
+            // Advanced PDF configuration options to force elements not to break
             const opt = {
-                margin:       [15, 0, 15, 0],
+                margin:       [15, 15, 15, 15], // Added margins to ensure spacing from page edges
                 filename:     'BPO_Founders_Blueprint.pdf',
-                image:        { type: 'jpeg', quality: 0.98 },
+                image:        { type: 'jpeg', quality: 1.0 },
                 html2canvas:  { scale: 2, useCORS: true, scrollY: 0 },
                 jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' },
-                pagebreak:    { mode: ['css', 'legacy'] }
+                pagebreak:    { mode: 'css', avoid: ['.keep-together', 'li', 'tr'] } // Tells library explicitly which elements CANNOT be split
             };
 
             // Generate and save the PDF
